@@ -1,9 +1,15 @@
 import { Navbar } from "@/components/navigation/navbar";
+import { FeaturesSection } from "@/sections/features/features";
+import { HeroSection } from "@/sections/hero";
 
 export default function Home() {
   return (
-    <div className="flex min-h-screen flex-col">
+    <div className="min-h-screen">
       <Navbar />
+      <main className="mx-auto">
+        <HeroSection />
+        <FeaturesSection />
+      </main>
     </div>
   );
 }

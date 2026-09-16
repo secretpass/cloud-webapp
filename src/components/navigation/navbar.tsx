@@ -1,7 +1,7 @@
 "use client";
 
 import { Button } from "@heroui/react";
-import { IconMenu, IconX } from "@tabler/icons-react";
+import { IconCloudFilled, IconMenu, IconX } from "@tabler/icons-react";
 import Link from "next/link";
 import { useState } from "react";
 import { ThemeToggle } from "@/components/shared/theme-toggle";
@@ -13,12 +13,14 @@ export function Navbar() {
   const toggleMenu = () => setIsOpen(!isOpen);
 
   return (
-    <nav className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-backdrop-filter:bg-background/60">
+    <nav className="sticky top-0 z-50 w-full bg-background/95 backdrop-blur supports-backdrop-filter:bg-background/60">
       <header className="container mx-auto">
         <div className="flex grow h-16 items-center justify-between">
           <Link href="/" className="flex items-center space-x-2">
-            <Logo className="size-8 text-primary" />
-            <span className="text-2xl font-bold">Secretpass.cloud</span>
+            <Logo className="size-7" />
+            <span className="text-2xl font-bold">Secretpass</span>
+            <span className="text-2xl font-bold text-muted">Cloud</span>
+            <IconCloudFilled className="size-7 text-muted" />
           </Link>
 
           <nav className="hidden md:flex items-center gap-6">

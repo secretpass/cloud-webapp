@@ -18,7 +18,7 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Secret Pass",
   description:
-    "SecretPass is a noncustodial credential management framework with support for local(version control) secure storage or through our managed service.",
+    "Encrypt and decrypt your secrets with your passkey on your device, store encrypted secrets in your codebase or on a our hosted service.",
 };
 
 export default async function RootLayout({ children }: LayoutProps<"/">) {

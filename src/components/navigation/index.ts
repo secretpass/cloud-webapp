@@ -1,1 +1,1 @@
-export { CommonNavbar } from "./navbar";
+export { Navbar } from "./navbar";
