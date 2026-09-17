@@ -32,9 +32,9 @@ jobs:
       # 2. Log in to Scaleway Container Registry
       - name: Log in to Scaleway Container Registry
         run: |
-          docker login ${{ env.SCW_REGISTRY_ENDPOINT }} \
+          docker login rg.it-mil.scw.eu/secretpass \
             -u nologin \
-            -p "${{ secrets.SCW_SECRET_KEY }}"
+            --password-stdin <<< "${{ secrets.SCW_SECRET_KEY }}"
 
       # 3. Build and Push Docker Image
       - name: Build and Push Docker Image
@@ -43,13 +43,13 @@ jobs:
           context: .
           push: true
           tags: |
-            ${{ env.SCW_REGISTRY_ENDPOINT }}/${{ env.IMAGE_NAME }}:${{ github.sha }}
-            ${{ env.SCW_REGISTRY_ENDPOINT }}/${{ env.IMAGE_NAME }}:latest
+            ${{ variables.SCW_REGISTRY_ENDPOINT }}/${{ env.IMAGE_NAME }}:${{ github.sha }}
+            ${{ variables.SCW_REGISTRY_ENDPOINT }}/${{ env.IMAGE_NAME }}:latest
 
       # 4. Deploy or Update Container in Scaleway Serverless Containers
       - name: Deploy to Scaleway Serverless Containers
         run: |
           scw container container deploy ${{ env.CONTAINER_NAME }} \
-            region=${{ env.SCW_REGION }} \
+            region=${{ variables.SCW_REGION }} \
             container-id=${{ secrets.SCW_CONTAINER_ID }} \
-            image=${{ env.SCW_REGISTRY_ENDPOINT }}/${{ env.IMAGE_NAME }}:${{ github.sha }}
+            image=${{ variables.SCW_REGISTRY_ENDPOINT }}/${{ env.IMAGE_NAME }}:${{ github.sha }}
