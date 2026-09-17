@@ -1,0 +1,55 @@
+name: Build and Deploy to Scaleway Serverless Containers
+
+on:
+  push:
+    branches:
+      - main
+
+env:
+  IMAGE_NAME: cloud-ui
+  CONTAINER_NAME: cloud-ui
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      # 1. Authenticate with Scaleway CLI & Export Config
+      - name: Setup Scaleway CLI
+        uses: scaleway/action-scw@v0
+        with:
+          access-key: ${{ secrets.SCW_ACCESS_KEY }}
+          secret-key: ${{ secrets.SCW_SECRET_KEY }}
+          default-project-id: ${{ secrets.SCW_DEFAULT_PROJECT_ID }}
+          export-config: true
+
+      # 2. Log in to Scaleway Container Registry
+      - name: Log in to Scaleway Container Registry
+        run: |
+          docker login ${{ env.SCW_REGISTRY_ENDPOINT }} \
+            -u nologin \
+            -p "${{ secrets.SCW_SECRET_KEY }}"
+
+      # 3. Build and Push Docker Image
+      - name: Build and Push Docker Image
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          push: true
+          tags: |
+            ${{ env.SCW_REGISTRY_ENDPOINT }}/${{ env.IMAGE_NAME }}:${{ github.sha }}
+            ${{ env.SCW_REGISTRY_ENDPOINT }}/${{ env.IMAGE_NAME }}:latest
+
+      # 4. Deploy or Update Container in Scaleway Serverless Containers
+      - name: Deploy to Scaleway Serverless Containers
+        run: |
+          scw container container deploy ${{ env.CONTAINER_NAME }} \
+            region=${{ env.SCW_REGION }} \
+            container-id=${{ secrets.SCW_CONTAINER_ID }} \
+            image=${{ env.SCW_REGISTRY_ENDPOINT }}/${{ env.IMAGE_NAME }}:${{ github.sha }}

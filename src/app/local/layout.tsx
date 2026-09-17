@@ -1,5 +1,5 @@
-import { CommonNavbar } from "@/components";
 import type { ReactNode } from "react";
+import { Navbar } from "@/components";
 
 export default function LocalManagerLayout({
   children,
@@ -8,7 +8,7 @@ export default function LocalManagerLayout({
 }) {
   return (
     <main>
-      <CommonNavbar />
+      <Navbar />
       Local secret manager
       {children}
     </main>
