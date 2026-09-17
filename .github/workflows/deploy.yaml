@@ -43,13 +43,13 @@ jobs:
           context: .
           push: true
           tags: |
-            ${{ variables.SCW_REGISTRY_ENDPOINT }}/${{ env.IMAGE_NAME }}:${{ github.sha }}
-            ${{ variables.SCW_REGISTRY_ENDPOINT }}/${{ env.IMAGE_NAME }}:latest
+            ${{ vars.SCW_REGISTRY_ENDPOINT }}/${{ env.IMAGE_NAME }}:${{ github.sha }}
+            ${{ vars.SCW_REGISTRY_ENDPOINT }}/${{ env.IMAGE_NAME }}:latest
 
       # 4. Deploy or Update Container in Scaleway Serverless Containers
       - name: Deploy to Scaleway Serverless Containers
         run: |
           scw container container deploy ${{ env.CONTAINER_NAME }} \
-            region=${{ variables.SCW_REGION }} \
+            region=${{ vars.SCW_REGION }} \
             container-id=${{ secrets.SCW_CONTAINER_ID }} \
-            image=${{ variables.SCW_REGISTRY_ENDPOINT }}/${{ env.IMAGE_NAME }}:${{ github.sha }}
+            image=${{ vars.SCW_REGISTRY_ENDPOINT }}/${{ env.IMAGE_NAME }}:${{ github.sha }}
