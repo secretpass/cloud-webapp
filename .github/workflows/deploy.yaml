@@ -6,8 +6,8 @@ on:
       - main
 
 env:
-  IMAGE_NAME: cloud-ui
-  CONTAINER_NAME: cloud-ui
+  IMAGE_NAME: cloud-webapp
+  CONTAINER_NAME: cloud-webapp
 
 jobs:
   build-and-deploy:
