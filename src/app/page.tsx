@@ -1,4 +1,5 @@
 import { Navbar } from "@/components/navigation/navbar";
+import { FAQSection } from "@/sections/faq";
 import { FeaturesSection } from "@/sections/features/features";
 import { HeroSection } from "@/sections/hero";
 
@@ -9,6 +10,7 @@ export default function Home() {
       <main className="mx-auto">
         <HeroSection />
         <FeaturesSection />
+        <FAQSection />
       </main>
     </div>
   );

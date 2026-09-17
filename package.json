@@ -13,24 +13,19 @@
     "@heroui/react": "^3.2.5",
     "@heroui/styles": "^3.2.5",
     "@tabler/icons-react": "^3.46.0",
-    "intlayer": "^9.5.2",
     "next": "16.3.5",
-    "next-intlayer": "^9.5.2",
     "react": "19.2.8",
     "react-dom": "19.2.8"
   },
   "devDependencies": {
-    "@ai-sdk/openai-compatible": "^3.0.48",
     "@biomejs/biome": "2.4.2",
-    "@intlayer/ai": "^9.5.1",
-    "@intlayer/swc": "^9.5.2",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "babel-plugin-react-compiler": "1.0.0",
     "tailwindcss": "^4",
-    "typescript": "^5"
+    "typescript": "^6"
   },
   "packageManager": "bun@1.4.2",
   "ignoreScripts": [
@@ -40,5 +35,6 @@
   "trustedDependencies": [
     "sharp",
     "unrs-resolver"
-  ]
+  ],
+  "type": "module"
 }
