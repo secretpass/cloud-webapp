@@ -1,9 +1,8 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import { cookies } from "next/headers";
 import ThemeProvider from "@/components/shared/theme-provider";
-import { UI_THEME_COOKIE_NAME, UiTheme } from "@/constants";
 import "./globals.css";
+import Script from "next/script";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -22,14 +21,23 @@ export const metadata: Metadata = {
 };
 
 export default async function RootLayout({ children }: LayoutProps<"/">) {
-  const _cookies = await cookies();
-  const theme = _cookies.get(UI_THEME_COOKIE_NAME)?.value ?? UiTheme.Light;
   return (
-    <html lang="en" data-theme={theme}>
+    <html lang="en" suppressHydrationWarning>
+        <head>
+            <Script id="set-theme" strategy="beforeInteractive">
+                {`
+                let theme = localStorage.getItem('ui-theme') || "system";
+                if(theme === "system") {
+                    theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+                }
+                document.body.parentElement.setAttribute("data-theme", theme)
+                `}
+            </Script><title>Secret Pass</title>
+        </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${theme} font-sans antialiased flex flex-col min-h-screen`}
+        className={`${geistSans.variable} ${geistMono.variable} font-sans antialiased flex flex-col min-h-screen`}
       >
-        <ThemeProvider theme={theme as UiTheme}>{children}</ThemeProvider>
+        <ThemeProvider>{children}</ThemeProvider>
       </body>
     </html>
   );

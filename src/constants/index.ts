@@ -1,6 +1,5 @@
 export enum UiTheme {
   Dark = "dark",
   Light = "light",
+  System = "system"
 }
-
-export const UI_THEME_COOKIE_NAME = "secretpass-ui-theme";
