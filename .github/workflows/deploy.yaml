@@ -47,9 +47,8 @@ jobs:
             ${{ vars.SCW_REGISTRY_ENDPOINT }}/${{ env.IMAGE_NAME }}:latest
 
       # 4. Deploy or Update Container in Scaleway Serverless Containers
-      - name: Deploy to Scaleway Serverless Containers
+      - name: Rollout latest image to Scaleway Serverless Containers
         run: |
-          scw container deploy ${{ env.CONTAINER_NAME }} \
+          scw container container redeploy \
             region=${{ vars.SCW_REGION }} \
-            container-id=${{ secrets.SCW_CONTAINER_ID }} \
-            image=${{ vars.SCW_REGISTRY_ENDPOINT }}/${{ env.IMAGE_NAME }}:${{ github.sha }}
+            container-id=${{ secrets.SCW_CONTAINER_ID }}
