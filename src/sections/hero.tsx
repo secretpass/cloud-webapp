@@ -5,11 +5,12 @@ import {
   IconBrandGithub,
 } from "@tabler/icons-react";
 import Link from "next/link";
+import { QuickStartDemo } from "@/components/guide/quick-start";
 
 export function HeroSection() {
   return (
-    <section>
-      <div className="container mx-auto relative flex flex-col items-center py-24 text-center md:py-32">
+    <section id="hero">
+      <div className="container mx-auto relative flex flex-col items-center pt-24 pb-12 text-center md:pt-32 md:pb-16">
         <Link
           href="https://github.com/secretpass"
           target="_blank"
@@ -29,7 +30,7 @@ export function HeroSection() {
           🤔 you need more than that?
         </p>
 
-        <p className="mt-6 max-w-2xl text-lg text-muted-foreground sm:text-xl">
+        <p className="mt-6 max-w-2xl text-lg text-muted sm:text-xl">
           Encrypt and decrypt{" "}
           <strong className="font-semibold">your secrets</strong> with{" "}
           <strong className="font-semibold">your passkey</strong> on{" "}
@@ -51,10 +52,13 @@ export function HeroSection() {
             </Button>
           </Link>
         </div>
-        <p className="mt-6 font-mono text-xs text-muted-foreground [animation-delay:400ms]">
+        <p className="my-6 font-mono text-xs text-muted [animation-delay:400ms]">
           Multi-User · No Secret Zero · Local Storage
         </p>
-        {/* TODO: Add screenshots of the local and cloud secret manager */}
+
+        <div className="text-left w-full my-6">
+          <QuickStartDemo />
+        </div>
       </div>
     </section>
   );

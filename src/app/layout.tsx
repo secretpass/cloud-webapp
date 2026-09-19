@@ -15,7 +15,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Secret Pass",
+  title: "Secretpass · Cloud",
   description:
     "Encrypt and decrypt your secrets with your passkey on your device, store encrypted secrets in your codebase or on a our hosted service.",
 };
@@ -32,7 +32,8 @@ export default async function RootLayout({ children }: LayoutProps<"/">) {
                 }
                 document.body.parentElement.setAttribute("data-theme", theme)
                 `}
-            </Script><title>Secret Pass</title>
+            </Script>
+            <title>Secretpass · Cloud</title>
         </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} font-sans antialiased flex flex-col min-h-screen`}

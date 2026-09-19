@@ -19,7 +19,7 @@ function FeatureItem({
   return (
     <Card>
       <Card.Header>
-        <Card.Title className="flex gap-2 items-center text-lg text-gray-600 dark:text-gray-400">
+        <Card.Title className="flex gap-2 items-center text-lg">
           <Icon className="size-5" />
           {title}
           <div className="grow" />
@@ -27,7 +27,7 @@ function FeatureItem({
           {local_support && <IconDeviceLaptop className="text-muted size-4" />}
         </Card.Title>
       </Card.Header>
-      <Card.Content className="text-base text-gray-700 dark:text-gray-300">
+      <Card.Content className="text-sm text-muted font-semibold">
         {description}
       </Card.Content>
     </Card>
@@ -50,12 +50,12 @@ export function FeaturesSection() {
   );
 
   return (
-    <section id="features" className="container py-24 sm:py-32 mx-auto">
+    <section id="features" className="container py-12 sm:py-16 mx-1 sm:mx-auto">
       <div className="mb-4 flex flex-col items-center gap-4 text-center">
         <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">
           Secrets that grow with you
         </h2>
-        <p className="max-w-3xl text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
+        <p className="max-w-3xl text-muted md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
           Features designed to allow you to grow from solo projects to large
           multi-product organizations
         </p>

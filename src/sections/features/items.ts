@@ -64,9 +64,9 @@ export const feature_items: IFeatureItem[] = [
   },
   {
     Icon: IconBotId,
-    title: "Agent and Machine Private Keys",
+    title: "Agent and Machine Access",
     description:
-      "Your code, AI agents and other systems still need to access secure systems, you can create limited scope public keys that allow access to specific environments and secrets",
+      "Your code, AI agents and other systems still need to access secure systems, you can create limited scope private keys that allow access to specific environments and/or secrets",
     availability: "all",
   },
   {

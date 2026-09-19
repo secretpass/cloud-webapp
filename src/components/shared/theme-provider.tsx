@@ -1,11 +1,11 @@
 "use client";
 
-import {createContext, type ReactNode, useContext, useEffect, useState} from "react";
+import {createContext, type ReactNode, useContext, useEffect, useMemo, useState} from "react";
 import { UiTheme } from "@/constants";
 
 
 
-const ThemeContext = createContext({theme: UiTheme.Light, setTheme: (_theme: UiTheme) => {}});
+const ThemeContext = createContext({theme: UiTheme.System, true_theme: UiTheme.Light, setTheme: (_theme: UiTheme) => {}});
 
 export default function ThemeProvider({
   children,
@@ -19,6 +19,13 @@ export default function ThemeProvider({
     updateDocumentTheme(theme);
     setLocalTheme(theme);
   }
+
+  const true_theme = useMemo(() => {
+    if(theme !== UiTheme.System || typeof document === "undefined") {
+      return theme;
+    }
+    return window.matchMedia("(prefers-color-scheme: dark)").matches ? UiTheme.Dark : UiTheme.Light;
+  }, [theme])
 
   useEffect(() => {
     if(!document) return;
@@ -35,7 +42,7 @@ export default function ThemeProvider({
   }, []);
 
   return (
-    <ThemeContext.Provider value={{theme, setTheme}}>{children}</ThemeContext.Provider>
+    <ThemeContext.Provider value={{theme, true_theme, setTheme}}>{children}</ThemeContext.Provider>
   );
 }
 
