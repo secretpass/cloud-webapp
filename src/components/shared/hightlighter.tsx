@@ -4,6 +4,7 @@ import language_csharp from "@shikijs/langs/csharp";
 import language_golang from "@shikijs/langs/go";
 import language_java from "@shikijs/langs/java";
 import language_php from "@shikijs/langs/php";
+import language_powershell from "@shikijs/langs/powershell";
 import language_python from "@shikijs/langs/python";
 import language_ruby from "@shikijs/langs/ruby";
 import language_rust from "@shikijs/langs/rust";
@@ -15,7 +16,6 @@ import ShikiHighlighter, {
   createHighlighterCore,
   createJavaScriptRegexEngine,
 } from "react-shiki/core";
-import { useTheme } from "@/components/shared/theme-provider";
 import type { CodeLanguage, UiTheme } from "@/constants";
 
 const highlighterPromise = createHighlighterCore({
@@ -31,6 +31,7 @@ const highlighterPromise = createHighlighterCore({
     language_shell,
     language_php,
     language_ruby,
+    language_powershell,
   ],
   engine: createJavaScriptRegexEngine(),
 });

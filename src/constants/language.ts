@@ -4,6 +4,7 @@ import {
   IconBrandCSharp,
   IconBrandGolang,
   IconBrandPhp,
+  IconBrandPowershell,
   IconBrandPython,
   IconBrandRust,
   IconBrandSwift,
@@ -24,6 +25,7 @@ export enum CodeLanguage {
   Shell = "shellscript",
   Php = "php",
   Ruby = "ruby",
+  Powershell = "powershell",
 }
 
 export const CodeLanguageLabel: Record<CodeLanguage, string> = {
@@ -37,6 +39,7 @@ export const CodeLanguageLabel: Record<CodeLanguage, string> = {
   [CodeLanguage.Shell]: "Shell",
   [CodeLanguage.Php]: "PHP",
   [CodeLanguage.Ruby]: "Ruby",
+  [CodeLanguage.Powershell]: "Powershell",
 };
 
 export const CodeLanguageIcon: Record<CodeLanguage, Icon> = {
@@ -50,4 +53,5 @@ export const CodeLanguageIcon: Record<CodeLanguage, Icon> = {
   [CodeLanguage.Ruby]: IconDiamondFilled,
   [CodeLanguage.Golang]: IconBrandGolang,
   [CodeLanguage.Shell]: IconTerminal,
+  [CodeLanguage.Powershell]: IconBrandPowershell,
 };

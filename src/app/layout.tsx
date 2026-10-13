@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import ThemeProvider from "@/components/shared/theme-provider";
 import "./globals.css";
 import Script from "next/script";
+import { AnalyticsProvider } from "@/analytics/provider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -22,23 +23,16 @@ export const metadata: Metadata = {
 
 export default async function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en" suppressHydrationWarning>
-        <head>
-            <Script id="set-theme" strategy="beforeInteractive">
-                {`
-                let theme = localStorage.getItem('ui-theme') || "system";
-                if(theme === "system") {
-                    theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
-                }
-                document.body.parentElement.setAttribute("data-theme", theme)
-                `}
-            </Script>
-            <title>Secretpass · Cloud</title>
-        </head>
+    <html lang="en" suppressHydrationWarning={true}>
+      <head>
+        <title>Secretpass · Cloud</title>
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} font-sans antialiased flex flex-col min-h-screen`}
       >
-        <ThemeProvider>{children}</ThemeProvider>
+        <AnalyticsProvider>
+          <ThemeProvider>{children}</ThemeProvider>
+        </AnalyticsProvider>
       </body>
     </html>
   );

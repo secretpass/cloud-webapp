@@ -1,5 +1,5 @@
 "use client";
-import { Card, ToggleButton, ToggleButtonGroup } from "@heroui/react";
+import { Card, Tabs, ToggleButton, ToggleButtonGroup } from "@heroui/react";
 import { IconCloud, IconDeviceLaptop } from "@tabler/icons-react";
 import { useMemo, useState } from "react";
 import { Logo } from "@/components";
@@ -62,30 +62,32 @@ export function FeaturesSection() {
       </div>
 
       <div className="flex justify-center mb-8">
-        <ToggleButtonGroup
-          selectionMode="single"
-          isDetached
-          selectedKeys={[desired_features]}
+        <Tabs
+          selectedKey={desired_features}
           onSelectionChange={(value) =>
-            setDesiredFeatures(
-              value.values().next().value as FeatureAvailability,
-            )
+            setDesiredFeatures(value as FeatureAvailability)
           }
-          size="sm"
         >
-          <ToggleButton id="all" variant="ghost">
-            <Logo className="size-4" />
-            all
-          </ToggleButton>
-          <ToggleButton id="cloud" variant="ghost">
-            <IconCloud className="size-4" />
-            cloud
-          </ToggleButton>
-          <ToggleButton id="local" variant="ghost">
-            <IconDeviceLaptop className="size-4" />
-            local
-          </ToggleButton>
-        </ToggleButtonGroup>
+          <Tabs.ListContainer>
+            <Tabs.List>
+              <Tabs.Tab id="all" className="h-auto py-0.5 gap-2">
+                <Logo className="size-4" />
+                all
+                <Tabs.Indicator />
+              </Tabs.Tab>
+              <Tabs.Tab id="cloud" className="h-auto py-0.5 gap-2">
+                <IconCloud className="size-4" />
+                cloud
+                <Tabs.Indicator />
+              </Tabs.Tab>
+              <Tabs.Tab id="local" className="h-auto py-0.5 gap-2">
+                <IconDeviceLaptop className="size-4" />
+                local
+                <Tabs.Indicator />
+              </Tabs.Tab>
+            </Tabs.List>
+          </Tabs.ListContainer>
+        </Tabs>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 2xl:grid-cols-3 gap-8">

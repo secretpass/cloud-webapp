@@ -1,5 +1,4 @@
 "use client";
-import { Link } from "@heroui/react";
 
 export function FAQSection() {
   return (
@@ -9,15 +8,10 @@ export function FAQSection() {
           Frequently Asked Questions
         </h2>
         <p className="max-w-3xl text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-          Got questions? We've got answers.
+          We're currently fielding these questions, please use the chat button
+          to get in touch with us, or engage with us directly on our community
+          channels.
         </p>
-      </div>
-
-      <div className="flex justify-center">
-        Got more questions, email:{" "}
-        <Link href="mailto:support@secretpass.cloud">
-          support@secretpass.cloud
-        </Link>
       </div>
     </section>
   );

@@ -1,58 +1,89 @@
 "use client";
 
-import {createContext, type ReactNode, useContext, useEffect, useMemo, useState} from "react";
+import Script from "next/script";
+import {
+  createContext,
+  type ReactNode,
+  useContext,
+  useEffect,
+  useMemo,
+  useState,
+} from "react";
 import { UiTheme } from "@/constants";
 
+const ThemeContext = createContext({
+  theme: UiTheme.System,
+  true_theme: UiTheme.Light,
+  setTheme: (_theme: UiTheme) => {},
+});
 
-
-const ThemeContext = createContext({theme: UiTheme.System, true_theme: UiTheme.Light, setTheme: (_theme: UiTheme) => {}});
-
-export default function ThemeProvider({
-  children,
-}: {
-  children: ReactNode;
-}) {
+export default function ThemeProvider({ children }: { children: ReactNode }) {
   const [theme, setLocalTheme] = useState<UiTheme>(UiTheme.System);
 
   const setTheme = (theme: UiTheme) => {
     localStorage.setItem("ui-theme", theme);
     updateDocumentTheme(theme);
     setLocalTheme(theme);
-  }
+  };
 
   const true_theme = useMemo(() => {
-    if(theme !== UiTheme.System || typeof document === "undefined") {
+    if (theme !== UiTheme.System || typeof document === "undefined") {
       return theme;
     }
-    return window.matchMedia("(prefers-color-scheme: dark)").matches ? UiTheme.Dark : UiTheme.Light;
-  }, [theme])
+    return window.matchMedia("(prefers-color-scheme: dark)").matches
+      ? UiTheme.Dark
+      : UiTheme.Light;
+  }, [theme]);
 
   useEffect(() => {
-    if(!document) return;
+    if (!document) return;
 
-    setLocalTheme(localStorage.getItem("ui-theme") as UiTheme || UiTheme.System)
+    setLocalTheme(
+      (localStorage.getItem("ui-theme") as UiTheme) || UiTheme.System,
+    );
 
     window.addEventListener("storage", (event) => {
-      if(event.key === "ui-theme" && event.newValue !== event.oldValue) {
+      if (event.key === "ui-theme" && event.newValue !== event.oldValue) {
         const new_theme = (event.newValue || UiTheme.Light) as UiTheme;
         updateDocumentTheme(new_theme);
         setLocalTheme(new_theme);
       }
-    })
+    });
   }, []);
 
   return (
-    <ThemeContext.Provider value={{theme, true_theme, setTheme}}>{children}</ThemeContext.Provider>
+    <>
+      <ThemeContext.Provider value={{ theme, true_theme, setTheme }}>
+        {children}
+      </ThemeContext.Provider>
+      <Script
+        id="set-theme"
+        strategy="beforeInteractive"
+        suppressHydrationWarning
+      >
+        {`
+              if(typeof window !== 'undefined') {
+                let theme = localStorage.getItem('ui-theme') || "system";
+                if(theme === "system") {
+                    theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+                }
+                document.body.parentElement.setAttribute("data-theme", theme)
+              }
+          `}
+      </Script>
+    </>
   );
 }
 
 function updateDocumentTheme(theme: string) {
-  if(theme === UiTheme.System) {
-    theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? UiTheme.Dark : UiTheme.Light;
+  if (theme === UiTheme.System) {
+    theme = window.matchMedia("(prefers-color-scheme: dark)").matches
+      ? UiTheme.Dark
+      : UiTheme.Light;
   }
   document.body.parentElement?.setAttribute("data-theme", theme);
 }
 
 export function useTheme() {
-  return useContext(ThemeContext)
+  return useContext(ThemeContext);
 }
