@@ -36,14 +36,11 @@ spass --env staging -- {{COMMAND}}
 spass --private-key="key generated from manager" --env staging -- {{COMMAND}}`;
 
 const UNIX_INSTRUCTIONS = `# Official Installer
-curl --proto '=https' --tlsv1.2 -LsSf https://github.com/secretpass/core/releases/download/0.1.0-prerelease.1/secretpass-cli-installer.sh | sh
-
-# Or use homebrew tap
-brew install secretpass/tap/secretpass-cli
+curl --proto '=https' --tlsv1.2 -LsSf https://github.com/secretpass/core/releases/download/0.1.0-prerelease.2/secretpass-cli-installer.sh | sh
 
 ${COMMON_INSTRUCTIONS}`;
 const WINDOWS_INSTRUCTIONS = `# Official Installer
-powershell -ExecutionPolicy Bypass -c "irm https://github.com/secretpass/core/releases/download/0.1.0-prerelease.1/secretpass-cli-installer.ps1 | iex"
+powershell -ExecutionPolicy Bypass -c "irm https://github.com/secretpass/core/releases/download/0.1.0-prerelease.2/secretpass-cli-installer.ps1 | iex"
 
 ${COMMON_INSTRUCTIONS}`;
 
